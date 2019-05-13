@@ -1,0 +1,31 @@
+<div class="col-lg-6">
+        <br>
+        <h3>{{title}}</h3>
+        <hr>
+    </div>
+    <div class="container">    
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">From</th>
+                    <th scope="col">To</th>
+                    <th scope="col">Rate.Sell</th>
+                    <th scope="col">Rate.Buy</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let rate of dataSource; let i = index">            
+                    <td>{{rate.from.code}}</td>
+                    <td>{{rate.to.code}}</td>
+                    <td>{{rate.sell}}</td>
+                    <td>{{rate.buy}}</td>
+                    <td>
+                        <a [routerLink]="['/rate/edit']" [queryParams]="{ id: rate._id }" class="nav-link">Edit</a>
+                    </td>
+                </tr>          
+            </tbody>
+        </table>
+        <br>
+        <input type="button" value="Add new rate" (click)="addRate()" class="btn btn-success">
+    </div>

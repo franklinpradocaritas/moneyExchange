@@ -1,0 +1,46 @@
+<div class="col-lg-6">
+        <br>
+        <h3>{{title}}</h3>
+        <hr>
+    
+        <div class="alert alert-success" *ngIf="status == 'success'">
+            Rate created successfully.
+        </div>
+        <div class="alert alert-danger" *ngIf="status == 'error'">
+            {{ statusMessage}}            
+        </div>
+    
+        <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)" class="col-lg-10">                
+            <div class="form-group">
+                <label for="form">From</label>
+                <!-- <select class="form-control" id="from" [ngModel]="rate.from" (ngModelChange)="synchroMembre($event,'pren')" required name="from"> -->
+                <select class="form-control" id="from" [ngModel]="rate.from" (ngModelChange)="synchroModel($event, 'from')" required name="from">
+                    <option *ngFor="let currency of currencies" [value]="currency._id">{{ currency.code }}</option>
+                </select>
+                <!-- <span *ngIf="!from.valid && from.touched" class="text-danger">From is required</span> -->
+            </div>
+            <div class="form-group">
+                <label for="to">To</label>
+                <!-- <select class="form-control" id="to" [ngModel]="rate.to" (ngModelChange)="synchroMembre($event,'pren')" required name="to"> -->
+                <select class="form-control" id="to" [ngModel]="rate.to" (ngModelChange)="synchroModel($event, 'to')" required name="to">
+                    <option *ngFor="let currency of currencies" [value]="currency._id">{{ currency.code }}</option>
+                </select>
+                <!-- <span *ngIf="!to.valid && to.touched" class="text-danger">To is required</span> -->
+            </div>
+            <div class="form-group">
+                <label>Sell</label>
+                <input type="number" name="sell" #sell="ngModel" [(ngModel)]="rate.sell" class="form-control" placeholder="Enter sell" required>
+                <span *ngIf="!sell.valid && sell.touched" class="text-danger">Sell is required</span>
+            </div>
+            <div class="form-group">
+                    <label>Buy</label>
+                    <input type="number" name="buy" #buy="ngModel" [(ngModel)]="rate.buy" class="form-control" placeholder="Enter sell" required>
+                    <span *ngIf="!buy.valid && buy.touched" class="text-danger">Buy is required</span>
+                </div>
+            <div class="text-center">
+                <input type="submit" value="Save" [disabled]="!registerForm.form.valid" class="btn btn-success">
+                <a class="btn btn-success ml-3 pl-3 pr-3" [routerLink]="['/rate/list']">Cancel</a>
+            </div>
+        </form>
+    </div>
+            

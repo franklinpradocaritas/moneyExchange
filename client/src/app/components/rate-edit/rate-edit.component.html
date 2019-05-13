@@ -1,0 +1,38 @@
+<div class="col-lg-6">
+        <br>
+        <h3>{{title}}</h3>
+        <hr>
+    
+        <div class="alert alert-success" *ngIf="status == 'success'">
+            Rate updated successfully.
+        </div>
+        <div class="alert alert-danger" *ngIf="status == 'error'">
+            Rate was not updated.
+        </div>
+    
+        <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)" class="col-lg-10">    
+            <div class="form-group">
+                <label>From</label>
+                <input type="text" name="from" #from="ngModel" [ngModel]="rate.from.code" class="form-control" readonly disabled>                
+            </div>
+            <div class="form-group">
+                    <label>To</label>
+                    <input type="text" name="to" #to="ngModel" [ngModel]="rate.to.code" class="form-control" readonly disabled>                
+                </div>
+            <div class="form-group">
+                <label>Sell</label>
+                <input type="number" name="sell" #sell="ngModel" [(ngModel)]="rate.sell" class="form-control" placeholder="Enter sell" required>
+                <span *ngIf="!sell.valid && sell.touched" class="text-danger">Sell is required</span>
+            </div>
+            <div class="form-group">
+                    <label>Buy</label>
+                    <input type="number" name="buy" #buy="ngModel" [(ngModel)]="rate.buy" class="form-control" placeholder="Enter sell" required>
+                    <span *ngIf="!buy.valid && buy.touched" class="text-danger">Buy is required</span>
+                </div>
+            <div class="text-center">
+                <input type="submit" value="Update" [disabled]="!registerForm.dirty" class="btn btn-success">        
+                <a class="btn btn-success ml-3 pl-3 pr-3" [routerLink]="['/rate/list']">Cancel</a>
+            </div>
+        </form>
+    </div>
+            

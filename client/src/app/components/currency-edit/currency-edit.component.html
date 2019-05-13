@@ -1,0 +1,30 @@
+<div class="col-lg-6">
+    <br>
+    <h3>{{title}}</h3>
+    <hr>
+
+    <div class="alert alert-success" *ngIf="status == 'success'">
+        Currency updated successfully.
+    </div>
+    <div class="alert alert-danger" *ngIf="status == 'error'">
+        Currency was not created.
+    </div>
+
+    <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)" class="col-lg-10">    
+        <div class="form-group">
+            <label>Code</label>
+            <input type="text" name="code" #code="ngModel" [(ngModel)]="currency.code" class="form-control" placeholder="Enter code" required>
+            <span *ngIf="!code.valid && code.touched" class="text-danger">Code is required</span>
+        </div>
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" name="name" #name="ngModel" [(ngModel)]="currency.name" class="form-control" placeholder="Enter name" required>
+            <span *ngIf="!name.valid && name.touched" class="text-danger">Name is required</span>
+        </div>
+        <div class="text-center">
+            <input type="submit" value="Update" [disabled]="!registerForm.dirty" class="btn btn-success">        
+            <a class="btn btn-success ml-3 pl-3 pr-3" [routerLink]="['/currency/list']">Cancel</a>
+        </div>
+    </form>
+</div>
+        
